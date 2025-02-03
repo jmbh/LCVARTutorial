@@ -1,0 +1,27 @@
+model
+title SWLS.agg;
+options   
+   maxthreads=4;
+   algorithm 
+      tolerance=1e-008 emtolerance=0,01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=0 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   step3 proportional bch;
+   output      
+      parameters=effect  betaopts=wl standarderrors=robust profile=posterior
+      probmeans=posterior estimatedvalues=model loadings;
+variables
+   dependent SWLS_agg continuous;
+   latent TraitClass nominal posterior = (TraitClass_1 TraitClass_2 TraitClass_3 TraitClass_4 TraitClass_5);
+equations
+   TraitClass <- 1;
+   SWLS_agg <- 1 + TraitClass;
+   SWLS_agg | TraitClass; //sets error variances free across classes
+end model
+

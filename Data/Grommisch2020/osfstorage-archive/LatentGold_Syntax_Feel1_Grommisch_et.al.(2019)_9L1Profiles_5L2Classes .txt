@@ -1,0 +1,38 @@
+model
+title SC9TC5;
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0,01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=500 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  includeall;
+   output      
+       parameters=first standarderrors estimatedvalues classification probmeans iterationdetails bivariateresiduals identification;
+variables
+   groupid SEMA_ID;
+   caseid RowNr;
+   dependent SITSEL continuous, SITMOD continuous, DIST continuous, ACPT continuous, RUM continuous, SOCSHR continuous, 
+             IGNR continuous, SUPR continuous, REAP continuous;
+   latent
+      TraitClass group nominal 5 ,
+      StateClass nominal 9;
+
+
+equations
+   TraitClass <- 1;
+   StateClass <- 1 | TraitClass ;
+   SITSEL <- 1 + StateClass;
+   SITMOD <- 1 + StateClass;
+   DIST <- 1 + StateClass;
+   ACPT <- 1 + StateClass;
+   RUM <- 1 + StateClass;
+   SOCSHR <- 1 + StateClass;
+   IGNR <- 1 + StateClass;
+   SUPR <- 1 + StateClass;
+   REAP <- 1 + StateClass;
