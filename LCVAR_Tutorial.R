@@ -208,7 +208,7 @@ dev.off()
 
 
 # --------------------------------------------------------
-# ---------- Posterior over Estimated Cluster Prob -------
+# ---------- Estimated Cluster Prior Prob -------
 # --------------------------------------------------------
 
 sum_out <- summary(out_1to10, show="GNL")
