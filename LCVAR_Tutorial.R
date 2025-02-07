@@ -162,10 +162,14 @@ out_1to10 <- readRDS("Files/Results_Gromisch2020_1to10.RDS")
 
 # ----- Get negLL / BIC -----
 sum_out <- summary(out_1to10, show="GNL")
+sum_out
 sum_out$FunctionOutput$Proportions
 
 # Convergence?
 sum_out$FunctionOutput$Converged # all
+
+# BIC plot
+plot(out_1to10, show = "GNL")
 
 # Get negLL
 negLL <- -sum_out$FunctionOutput$`log-likelihood`
