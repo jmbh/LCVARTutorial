@@ -111,7 +111,8 @@ plotBV_flex <- function(data,
                         fit = TRUE,
                         para = FALSE,
                         diag = FALSE,
-                        xlim = NULL) {
+                        xlim = NULL,
+                        R2=FALSE) {
 
   # Subset data
   data_ss <- data[data[['SEMA_ID']] == ID, ]
@@ -153,6 +154,14 @@ plotBV_flex <- function(data,
                               ", b = ",
                               round(coef(lm_obj)[2], 2)),
                 col="orange")
+
+  # ADD R2
+  if(R2) {
+    r2 <- cor(x1, x2, use="complete.obs")^2
+    r2 <- round(r2, 2)
+    text(20, 80, bquote(R^2 == .(r2)))
+
+  }
 
 } # eoF
 
