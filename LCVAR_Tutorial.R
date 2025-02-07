@@ -212,7 +212,7 @@ dev.off()
 
 
 # --------------------------------------------------------
-# ---------- Estimated Cluster Prior Prob -------
+# ---------- Estimated Cluster Proportions ---------------
 # --------------------------------------------------------
 
 sum_out <- summary(out_1to10, show="GNL")
@@ -236,7 +236,7 @@ l_coefs <- list()
 K <- 10
 for(k in 1:K) l_coefs[[k]] <- coef.ClusterVAR(out_1to10, Model = rep(1, k))
 
-# Get percentages for K=4 model for plotting below
+# Get proportions for K=4 model for plotting below
 K4_prop <- m_float[4, 1:4]
 
 # --------------------------
