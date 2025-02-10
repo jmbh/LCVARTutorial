@@ -119,6 +119,7 @@ for(j in 1:n_pers) {
 dev.off()
 
 
+
 # --------------------------------------------------------
 # ---------- Number Predictable Time Points --------------
 # --------------------------------------------------------
@@ -479,9 +480,51 @@ dev.off()
 
 
 
+# --------------------------------------------------------
+# ---------- Time Series Plots with Cluster Membership ---
+# --------------------------------------------------------
+
+# This is the same figure as above, but with the cluster assignment
+# and a dataset in which people are ordered by cluster assignment
+
+# cmemb
+ord <- order(cmemb)
+u_pers_ord <- u_pers[ord]
+cmemb_ord <- cmemb[ord]
+
+pdf("Figures/TSPlots_All_Persons_Grommisch2020_wCl.pdf", width=8, height=4)
+
+n_pers <- length(u_pers)
 
 
+# Loop over persons
+for(j in 1:n_pers) {
+  # Make Layout
+  lmat <- matrix(1:8, 2, 4, byrow = TRUE)
+  lo <- layout(lmat, widths = c(1, .25, 1, .25), heights = c(1,1))
 
+  # Make title for person
+
+
+  # Make plot for person j
+  for(i in 1:4) {
+
+    title <- paste0(vars_em[i], " (person = ", u_pers[j], "; Cluster =", cmemb_ord[j], ")")
+
+    PlotTS_Flex(data = data,
+                IDcol = "SEMA_ID",
+                ID = u_pers_ord[j], # Subject number, here fixed
+                variable = vars_em[i], # Variable
+                layout = FALSE,
+                title = title,
+                ylab = TRUE,
+                xlim = c(1,200))
+
+  }
+  print(j)
+}
+
+dev.off()
 
 
 

@@ -78,7 +78,12 @@ PlotTS_Flex <- function(data,
 
   if(resLegend) legend("topright", legend=c("Data", "Predictions"), bty="n", text.col=c("black", "orange"))
 
-  if(title) title(main=paste0(variable, " (person = ", u_pers[j], ")"), font.main=1)
+  if(!is.null(title)) {
+    if(title==TRUE) title(main=paste0(variable, " (person = ", u_pers[j], ")"), font.main=1)
+    if(class(title) == "character") title(title, , font.main=1)
+  }
+
+
   # Marginal
   par(mar=c(4,0,2,1))
   hist_data <- hist(data_ss[, variable], plot = FALSE, breaks=seq(0, 100, length=20))
