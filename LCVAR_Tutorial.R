@@ -163,10 +163,14 @@ out_1to10 <- readRDS("Files/Results_Gromisch2020_1to10.RDS")
 
 # ----- Get negLL / BIC -----
 sum_out <- summary(out_1to10, show="GNL")
+sum_out
 sum_out$FunctionOutput$Proportions
 
 # Convergence?
 sum_out$FunctionOutput$Converged # all
+
+# BIC plot
+plot(out_1to10, show = "GNL")
 
 # Get negLL
 negLL <- -sum_out$FunctionOutput$`log-likelihood`
@@ -209,7 +213,7 @@ dev.off()
 
 
 # --------------------------------------------------------
-# ---------- Posterior over Estimated Cluster Prop -------
+# ---------- Estimated Mixing Proportions -------
 # --------------------------------------------------------
 
 sum_out <- summary(out_1to10, show="GNL")
@@ -233,7 +237,7 @@ l_coefs <- list()
 K <- 10
 for(k in 1:K) l_coefs[[k]] <- coef.ClusterVAR(out_1to10, Model = rep(1, k))
 
-# Get percentages for K=4 model for plotting below
+# Get proportions for K=4 model for plotting below
 K4_prop <- m_float[4, 1:4]
 
 # --------------------------
